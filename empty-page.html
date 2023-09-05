@@ -102,10 +102,6 @@
 <script>
     const shareCookiePath = "shared-cookie";
 
-    //Expire the cookie before trying to sync the value from localstorage
-    document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-
-
     setSharedCookie();
 
     //Expire shared-cooke/access when user logged out.
@@ -153,13 +149,18 @@
 
     //Updates what ever values it's in the localstorage and saves is to a cookie that can be read by other subdomains
     function syncCookie(newName, options) {
+        let synced = false;
         for (const key in localStorage) {
             if (this.isAccessTokenPath(key)) {
+                synced = true;
                 const existingValue = localStorage.getItem(key);
                 if (existingValue !== null) {
                     this.setCookie(newName, existingValue, options);
                 }
             }
+        }
+        if (!synced){
+            document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         }
     }
 
