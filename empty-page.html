@@ -101,6 +101,11 @@
 </script>
 <script>
     const shareCookiePath = "shared-cookie";
+
+    //Expire the cookie before trying to sync the value from localstorage
+    document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+
     setSharedCookie();
 
     //Expire shared-cooke/access when user logged out.
@@ -153,8 +158,6 @@
                 const existingValue = localStorage.getItem(key);
                 if (existingValue !== null) {
                     this.setCookie(newName, existingValue, options);
-                } else {
-                    document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                 }
             }
         }
