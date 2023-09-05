@@ -153,6 +153,8 @@
                 const existingValue = localStorage.getItem(key);
                 if (existingValue !== null) {
                     this.setCookie(newName, existingValue, options);
+                } else {
+                    document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                 }
             }
         }
