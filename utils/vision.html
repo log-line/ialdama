@@ -61,7 +61,7 @@
 </div>
 
 <div class="content">
-    <iframe src="https://vision.ialdama.dev/"></iframe>
+    <iframe id="vision" src="https://vision.ialdama.dev/"></iframe>
 </div>
 
 <script>
@@ -73,13 +73,16 @@
         window.location.href = "/login.html";
     }
 
-    // Check if the user is already logged in
-    if (localStorage.getItem("CognitoIdentityServiceProvider.test.idToken")) {
-        document.getElementById("logoutButton").style.display = "block";
-    } else {
-        // Redirect to the login page
-        window.location.href = "/login.html";
-    }
+    document.getElementById('vision').onload = function() {
+        // Check if the user is already logged in
+        if (localStorage.getItem("CognitoIdentityServiceProvider.test.idToken")) {
+            document.getElementById("logoutButton").style.display = "block";
+        } else {
+            // Redirect to the login page
+            window.location.href = "/login.html";
+        }
+    };
+
 </script>
 </body>
 </html>
