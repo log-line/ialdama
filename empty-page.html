@@ -100,6 +100,7 @@
     paintPixelArt(duckPixeles,25,"random");
 </script>
 <script>
+    console.log("running code empty page");
     const shareCookiePath = "shared-cookie";
 
     setSharedCookie();
@@ -149,17 +150,21 @@
 
     //Updates what ever values it's in the localstorage and saves is to a cookie that can be read by other subdomains
     function syncCookie(newName, options) {
+        console.log("Sync");
+
         let synced = false;
         for (const key in localStorage) {
             if (this.isAccessTokenPath(key)) {
                 synced = true;
                 const existingValue = localStorage.getItem(key);
                 if (existingValue !== null) {
+                    console.log("Updating cookie");
                     this.setCookie(newName, existingValue, options);
                 }
             }
         }
         if (!synced){
+            console.log("Expiring cookie");
             document.cookie = shareCookiePath +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         }
     }
